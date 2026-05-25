@@ -1,37 +1,176 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0a0a" />
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#5E0ED7" />
 
-    <title>The Cosmic Dev — Stellar Web Apps & Cosmic-Grade Software</title>
-    <meta name="description" content="The Cosmic Dev crafts pixel-perfect web applications and high-performance software. From concept to launch — building stellar products that propel ambitious brands into new galaxies of growth." />
-    <meta name="keywords" content="web development, web apps, software development, react developer, full stack, custom software, product design, the cosmic dev" />
-    <meta name="author" content="The Cosmic Dev" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://thecosmicdev.net/" />
+<title>The Cosmic Dev — Fearless Vision Delivered</title>
+<meta name="description" content="The Cosmic Dev crafts pixel-perfect web applications and high-performance software. From concept to launch — building stellar products that propel ambitious brands into new galaxies of growth." />
+<meta name="keywords" content="web development, web apps, software development, react developer, full stack, custom software, product design, the cosmic dev" />
+<meta name="author" content="The Cosmic Dev" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://thecosmicdev.net/" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Open Graph / Facebook / LinkedIn -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://thecosmicdev.net/" />
-    <meta property="og:title" content="The Cosmic Dev — Stellar Web Apps & Cosmic-Grade Software" />
-    <meta property="og:description" content="From concept to launch, The Cosmic Dev crafts pixel-perfect web applications and high-performance software for ambitious brands." />
-    <meta property="og:image" content="https://thecosmicdev.net/og-image.png" />
-    <meta property="og:site_name" content="The Cosmic Dev" />
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://thecosmicdev.net/" />
+<meta property="og:title" content="The Cosmic Dev — Fearless Vision Delivered" />
+<meta property="og:description" content="From concept to launch, The Cosmic Dev crafts pixel-perfect web applications and high-performance software for ambitious brands." />
+<meta property="og:image" content="https://thecosmicdev.net/og-image.png" />
+<meta property="og:site_name" content="The Cosmic Dev" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://thecosmicdev.net/" />
-    <meta name="twitter:title" content="The Cosmic Dev — Stellar Web Apps & Cosmic-Grade Software" />
-    <meta name="twitter:description" content="From concept to launch, The Cosmic Dev crafts pixel-perfect web applications and high-performance software for ambitious brands." />
-    <meta name="twitter:image" content="https://thecosmicdev.net/og-image.png" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://thecosmicdev.net/" />
+<meta name="twitter:title" content="The Cosmic Dev — Fearless Vision Delivered" />
+<meta name="twitter:description" content="From concept to launch, The Cosmic Dev crafts pixel-perfect web applications and high-performance software for ambitious brands." />
+<meta name="twitter:image" content="https://thecosmicdev.net/og-image.png" />
 
-    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/04e6981992c0e2e7642af2074ebe3901?family=Helvetica+Now+Display+Bold" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { accent: '#5E0ED7' },
+        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+      },
+    },
+  };
+</script>
+
+<style>
+  html, body { background:#fff; color:#000; font-family:'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  body { overflow-x: hidden; }
+  ::selection { background:#5E0ED7; color:#fff; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background:#fff; }
+  ::-webkit-scrollbar-thumb { background:#000; border:2px solid #fff; }
+  ::-webkit-scrollbar-thumb:hover { background:#5E0ED7; }
+
+  /* ----- Motion ----- */
+  @keyframes cd-fade-up   { from { opacity:0; transform: translateY(32px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes cd-fade-in   { from { opacity:0; } to { opacity:1; } }
+  @keyframes cd-marquee   { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes cd-spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes cd-pulse-dot { 0%,100% { transform: scale(1); opacity:1;} 50% { transform: scale(1.4); opacity:.6;} }
+
+  /* keyframe-driven (used for dynamic remount-based reveals — testimonial swap, success state, etc) */
+  .cd-fade-up   { opacity:0; animation: cd-fade-up   .6s cubic-bezier(.22,1,.36,1) forwards; }
+  .cd-fade-in   { opacity:0; animation: cd-fade-in   .8s cubic-bezier(.22,1,.36,1) forwards; }
+
+  /* Mount-driven (transitions, gated by a `.mounted` ancestor — robust against throttled animation timelines).
+     Default state = end state (visible). Pre-mount class snaps to start state with no transition,
+     then `.mounted` releases everything via transition. */
+  .mount-down, .mount-up, .mount-clip > span > span {
+    transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  }
+  .pre-mount .mount-down { opacity: 0; transform: translateY(-20px); transition: none; }
+  .pre-mount .mount-up   { opacity: 0; transform: translateY(32px);  transition: none; }
+  .pre-mount .mount-clip > span > span { transform: translateY(110%); transition: none; }
+
+  /* In-view triggered (set via JS) */
+  .in-view-init { opacity:0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .in-view-init.in-view-on { opacity:1; transform: translateY(0); }
+
+  .in-view-clip > * { display:inline-block; transform: translateY(110%); transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .in-view-clip.in-view-on > * { transform: translateY(0); }
+
+  .marquee-track { animation: cd-marquee 40s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  /* Section labels */
+  .section-eyebrow::before { content:""; display:inline-block; width:8px; height:8px; border-radius:9999px; background:#5E0ED7; margin-right:12px; vertical-align: middle; }
+
+  /* Big numerals */
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  /* Studio card */
+  .studio-card { position: relative; overflow:hidden; }
+  .studio-card .reveal { position:absolute; inset:0; background:#000; color:#fff; transform: translateY(101%); transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .studio-card:hover .reveal { transform: translateY(0); }
+
+  /* Expertise row */
+  .exp-row { transition: background-color .4s ease, color .4s ease; }
+  .exp-row .exp-arrow { transition: transform .5s cubic-bezier(.22,1,.36,1); }
+  .exp-row:hover .exp-arrow { transform: translate(6px,-6px) rotate(0deg); }
+  .exp-row .exp-extra { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s ease, opacity .4s ease, padding .4s ease; }
+  .exp-row.open .exp-extra { max-height: 360px; opacity: 1; }
+
+  /* Mobile menu */
+  .mm-enter { opacity: 0; transform: translateY(-8px); }
+  .mm-show  { opacity: 1; transform: translateY(0); transition: opacity .35s ease, transform .35s ease; }
+
+  /* Buttons */
+  .btn-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.25rem; border:1.5px solid currentColor; border-radius:9999px; font-weight:600; letter-spacing:.15em; text-transform: uppercase; font-size:12px; transition: background .25s ease, color .25s ease; }
+  .btn-pill:hover { background:#000; color:#fff; }
+  .btn-pill.accent { background:#5E0ED7; color:#fff; border-color:#5E0ED7; }
+  .btn-pill.accent:hover { background:#000; border-color:#000; color:#fff; }
+
+  /* Video fallback bg */
+  .hero-fallback { background: radial-gradient(140% 100% at 70% 30%, #2a0a55 0%, #0a0014 60%, #000 100%); }
+
+  /* Tag */
+  .tag { display:inline-flex; align-items:center; gap:.5rem; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; }
+  .tag::before { content:""; width:6px; height:6px; border-radius:9999px; background:#5E0ED7; }
+
+  /* Focus */
+  :focus-visible { outline: 2px solid #5E0ED7; outline-offset: 2px; }
+
+  /* Form */
+  .field { background: transparent; border:0; border-bottom: 1.5px solid rgba(0,0,0,.2); padding: 14px 0; font-size: clamp(18px, 2.2vw, 28px); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color:#000; width:100%; transition: border-color .3s ease; }
+  .field::placeholder { color: rgba(0,0,0,.25); }
+  .field:focus { outline: none; border-color: #5E0ED7; }
+  textarea.field { resize: none; }
+
+  /* Logo dot heartbeat */
+  .logo-dot { animation: cd-pulse-dot 2.4s ease-in-out infinite; }
+
+  /* Cursor blob */
+  .cursor-blob { position: fixed; pointer-events: none; width: 18px; height: 18px; border-radius:9999px; background:#5E0ED7; mix-blend-mode: difference; z-index: 200; transform: translate(-50%,-50%); transition: width .25s ease, height .25s ease, opacity .25s ease; opacity: 0; }
+  @media (hover: hover) { .cursor-blob { opacity: 1; } }
+
+  /* Spin badge */
+  .spin-slow { animation: cd-spin-slow 16s linear infinite; }
+
+  /* Section dividers */
+  .rule { border-top: 1.5px solid #000; }
+  .rule-soft { border-top: 1px solid rgba(0,0,0,.12); }
+
+  /* Counter wrapper */
+  .stat-num { font-size: clamp(1.5rem, 5vw, 3.5rem); font-weight: 600; line-height: 1; }
+
+  /* Hero heading */
+  .hero-word { font-size: clamp(2rem, 9vw, 9rem); line-height: 0.88; font-weight: 600; text-transform: uppercase; letter-spacing: -0.01em; }
+
+  /* utility */
+  .no-tap { -webkit-tap-highlight-color: transparent; }
+</style>
+</head>
+<body class="text-black antialiased">
+
+<div id="root"></div>
+
+<!-- React 18 + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="src/primitives.jsx"></script>
+<script type="text/babel" src="src/hero.jsx"></script>
+<script type="text/babel" src="src/story.jsx"></script>
+<script type="text/babel" src="src/expertise.jsx"></script>
+<script type="text/babel" src="src/studios.jsx"></script>
+<script type="text/babel" src="src/feedback.jsx"></script>
+<script type="text/babel" src="src/contact.jsx"></script>
+<script type="text/babel" src="src/app.jsx"></script>
+
+</body>
 </html>
